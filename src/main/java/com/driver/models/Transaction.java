@@ -1,6 +1,8 @@
 package com.driver.models;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.fasterxml.jackson.databind.annotation.JsonPOJOBuilder;
+//import lombok.*;
 import org.hibernate.annotations.CreationTimestamp;
 
 import javax.persistence.*;
@@ -8,6 +10,7 @@ import java.util.Date;
 import java.util.UUID;
 
 @Entity
+
 public class Transaction {
 
     @Id
@@ -36,18 +39,6 @@ public class Transaction {
 
     @CreationTimestamp
     private Date transactionDate;
-
-    public Transaction() {
-    }
-
-    public Transaction(int id, String transactionId, Card card, Book book, int fineAmount, boolean isIssueOperation) {
-        this.id = id;
-        this.transactionId = transactionId;
-        this.card = card;
-        this.book = book;
-        this.fineAmount = fineAmount;
-        this.isIssueOperation = isIssueOperation;
-    }
 
     public int getId() {
         return id;
@@ -89,8 +80,20 @@ public class Transaction {
         this.fineAmount = fineAmount;
     }
 
+    public boolean isIssueOperation() {
+        return isIssueOperation;
+    }
+
+    public void setIssueOperation(boolean issueOperation) {
+        isIssueOperation = issueOperation;
+    }
+
     public TransactionStatus getTransactionStatus() {
         return transactionStatus;
+    }
+
+    public void setTransactionStatus(TransactionStatus transactionStatus) {
+        this.transactionStatus = transactionStatus;
     }
 
     public Date getTransactionDate() {
@@ -100,17 +103,4 @@ public class Transaction {
     public void setTransactionDate(Date transactionDate) {
         this.transactionDate = transactionDate;
     }
-
-    public void setTransactionStatus(TransactionStatus transactionStatus) {
-        this.transactionStatus = transactionStatus;
-    }
-
-    public boolean isIssueOperation() {
-        return isIssueOperation;
-    }
-
-    public void setIssueOperation(boolean issueOperation) {
-        isIssueOperation = issueOperation;
-    }
 }
-

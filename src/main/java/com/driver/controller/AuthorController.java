@@ -1,6 +1,8 @@
 package com.driver.controller;
 
-//import com.driver.RequestDto.AuthorRequestDto;
+//Add required annotations
+
+
 import com.driver.models.Author;
 import com.driver.services.AuthorService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -12,21 +14,20 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
-@RequestMapping
-
-//Add required annotations
+@RequestMapping("/author")
 public class AuthorController {
+
+    //Write createAuthor API with required annotations
 
     @Autowired
     AuthorService authorService;
 
+    @PostMapping("/")
+    public ResponseEntity createAuthor(@RequestBody Author author){
 
-    @PostMapping("/author/")
-    public ResponseEntity<String> createAuthor(@RequestBody() Author author)
-    {
         authorService.create(author);
-        return new ResponseEntity<>("Success", HttpStatus.CREATED);
+        return new ResponseEntity<>("the author is successfully added to the system", HttpStatus.CREATED);
+
     }
 
-    //Write createAuthor API with required annotations
 }

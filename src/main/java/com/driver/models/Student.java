@@ -1,6 +1,7 @@
 package com.driver.models;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+//import lombok.*;
 import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
 
@@ -22,6 +23,13 @@ public class Student {
     private String country;
 
     public Student() {
+    }
+
+    public Student(String emailId, String name, int age, String country) {
+        this.emailId = emailId;
+        this.name = name;
+        this.age = age;
+        this.country = country;
     }
 
     // alter table student add foreign key constraint card references Card(id)
@@ -49,14 +57,6 @@ public class Student {
                 ", createdOn=" + createdOn +
                 ", updatedOn=" + updatedOn +
                 '}';
-    }
-
-    public Student(int id, String emailId, String name, int age, String country) {
-        this.id = id;
-        this.emailId = emailId;
-        this.name = name;
-        this.age = age;
-        this.country = country;
     }
 
     public int getId() {
@@ -106,4 +106,21 @@ public class Student {
     public void setCard(Card card) {
         this.card = card;
     }
+
+    public Date getCreatedOn() {
+        return createdOn;
+    }
+
+    public void setCreatedOn(Date createdOn) {
+        this.createdOn = createdOn;
+    }
+
+    public Date getUpdatedOn() {
+        return updatedOn;
+    }
+
+    public void setUpdatedOn(Date updatedOn) {
+        this.updatedOn = updatedOn;
+    }
+
 }

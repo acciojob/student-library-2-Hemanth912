@@ -1,6 +1,5 @@
 package com.driver.controller;
 
-//import com.driver.RequestDto.BookRequestDto;
 import com.driver.models.Book;
 import com.driver.services.BookService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -12,31 +11,33 @@ import java.util.List;
 
 //Add required annotations
 
+
 @RestController
-@RequestMapping
+@RequestMapping("/book")
 public class BookController {
+
+
+    //Write createBook API with required annotations
 
     @Autowired
     BookService bookService;
-    //Write createBook API with required annotations
-    @PostMapping("/book/")
-    public ResponseEntity<String> createBook(@RequestBody() Book book)
-    {
+
+    @PostMapping("/")
+    public ResponseEntity createBook(@RequestBody Book book){
+
         bookService.createBook(book);
-        return new ResponseEntity<>("Success",HttpStatus.CREATED);
+        return new ResponseEntity<>("the book is added successfully",HttpStatus.CREATED);
     }
 
     //Add required annotations
-    @GetMapping("/book/")
-    public ResponseEntity<List<Book>> getBooks(@RequestParam(value = "genre", required = false) String genre,
+    @GetMapping("/")
+    public ResponseEntity getBooks(@RequestParam(value = "genre", required = false) String genre,
                                    @RequestParam(value = "available", required = false, defaultValue = "false") boolean available,
                                    @RequestParam(value = "author", required = false) String author){
 
-        List<Book> bookList = null; //find the elements of the list by yourself
+        List<Book> bookList = bookService.getBooks(genre,available,author); //find the elements of the list by yourself
 
-       bookList= bookService.getBooks(genre,available,author);
-
-        return new ResponseEntity<>(bookList, HttpStatus.OK);
+        return new ResponseEntity<>(bookList,HttpStatus.OK);
 
     }
 }
